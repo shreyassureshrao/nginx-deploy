@@ -1,3 +1,4 @@
+# manifest.yaml file
 # File: nginx-deployment.yaml
 
 apiVersion: apps/v1
