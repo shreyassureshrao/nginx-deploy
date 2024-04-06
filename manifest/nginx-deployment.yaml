@@ -1,17 +1,19 @@
-# File: nginx-deployment.yaml
-
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
-  name: nginx-deployment
-  labels:
-    app: nginx
+  name: nginx-canary
   namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: nginx
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+        pause:
+          duration: 10m
   template:
     metadata:
       labels:
@@ -19,21 +21,19 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:latest
+        image: nginx:stable-alpine3.17-slim
         ports:
         - containerPort: 80
 ---
-# Nodeport service to expose the application
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
   namespace: default
 spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
   selector:
     app: nginx
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: NodePort
