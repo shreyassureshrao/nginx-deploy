@@ -19,12 +19,5 @@ spec:
         ports:
         - containerPort: 80
   strategy:
-    rolloutStrategy: 
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 1
-        maxSurge: 1
-  selector:
-    matchLabels:
-      app: nginx
+    blueGreen: {}
   minReadySeconds: 30
