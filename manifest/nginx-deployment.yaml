@@ -58,7 +58,7 @@ spec:
     port: 80
     targetPort: 80
   selector:
-    app: nginx-rollout
+    app: nginx
 ---
 apiVersion: v1
 kind: Service
