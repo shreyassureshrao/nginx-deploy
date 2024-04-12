@@ -6,7 +6,7 @@ metadata:
     app: nginx
   namespace: default
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:latest
+        image: nginx:stable-alpine3.17-slim
         ports:
         - containerPort: 80
 ---
@@ -27,7 +27,7 @@ metadata:
   name: nginx-rollout
   namespace: default
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
