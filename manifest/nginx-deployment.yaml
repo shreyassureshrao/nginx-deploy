@@ -12,7 +12,6 @@ spec:
     canary:
       steps:
       - setWeight: 20
-        pause: {}
   template:
     metadata:
       labels:
@@ -27,6 +26,8 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+  pause:
+    duration: 10m
 ---
 apiVersion: v1
 kind: Service
